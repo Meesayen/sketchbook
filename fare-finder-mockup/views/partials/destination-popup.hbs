@@ -1,0 +1,12 @@
+<div class="destination-popup">
+	<div class="header">
+		<input type="text" name="filter" required>
+		<div class="info">{{info}}</div>
+		<div class="hint"></div>
+	</div>
+	<div class="content">
+		{{#each bestDestinations}}
+			{{{include 'destination-item'}}}
+		{{/each}}
+	</div>
+</div>

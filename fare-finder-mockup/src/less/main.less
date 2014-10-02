@@ -1,0 +1,145 @@
+@base: #f938ab;
+
+.box-shadow(@style, @c) when (iscolor(@c)) {
+  box-shadow:         @style @c;
+}
+.box-shadow(@style, @alpha: 50%) when (isnumber(@alpha)) {
+  .box-shadow(@style, rgba(0, 0, 0, @alpha));
+}
+
+.button {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 20px;
+  width: 200px;
+  background: #dfc;
+  border-radius: 4px;
+  color: #333;
+  font-family: verdana;
+  vertical-align: top;
+}
+
+.popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  opacity: 0;
+  background: rgba(0, 0, 0, .4);
+  transition: opacity 150ms linear;
+
+  &.show {
+    opacity: 1;
+  }
+
+  > * {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 600px;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 2px;
+    background: white;
+    font-family: helvetica;
+    box-sizing: border-box;
+    padding: 20px;
+    .box-shadow(0px 5px 7px, 10%);
+    transform: translate3d(-50%, -50%, 0) scale(0.2);
+    transition: transform 200ms ease-in;
+
+    * {
+      opacity: 0;
+    }
+  }
+
+  > .reveal {
+    * {
+      opacity: 1;
+      transition: opacity 300ms linear;
+    }
+  }
+
+  > .open {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+  }
+
+  .content {
+    margin-top: 25px;
+  }
+}
+
+.destination-popup {
+  .item {
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 10px;
+    line-height: 25px;
+    border: 1px solid rgba(0, 0, 0,0.2);
+    width: 180px;
+    margin-right: 8px;
+    margin-bottom: 12px;
+
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+
+    &.selected {
+      border-color: #00CEE8;
+      box-shadow: 0 0 0 2px #00CEE8;
+    }
+
+    .code {
+      font-size: 18px;
+      font-family: monospace;
+
+      span {
+        font-family: helvetica;
+        font-size: 13px;
+        color: rgba(0, 0, 0, .5);
+      }
+    }
+
+    .name {
+      font-size: 15px;
+      font-weight: bold;
+    }
+  }
+
+  .header {
+    position: relative;
+  }
+
+  input[type="text"] {
+    font-size: 27px;
+    width: 100%;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, .65);
+    padding: 6px 8px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    opacity: 0;
+  }
+
+  input[type="text"]:valid {
+    + .info {
+      display: none;
+    }
+  }
+
+  .hint, .info {
+    position: absolute;
+    font-size: 27px;
+    color: rgba(0, 0, 0, .3);
+    top: 6px;
+    left: 5px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .hint {
+    color: rgba(0, 0, 0, .65);
+    text-align: center;
+  }
+}
