@@ -1,5 +1,5 @@
 {
-  "name": "Fare Finder Prototype",
+  "name": "fare-finder-prototype",
   "version": "0.1.0",
   "scripts": {
     "test": "gulp test"

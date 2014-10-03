@@ -9,6 +9,8 @@ o.run();
 
 var handleArrows = key => {
   var s = document.querySelector('.popup .item.selected');
+  var children = s.parentNode.childNodes;
+  var i = toArray(children).indexOf(s);
   switch(key) {
     case 37:
       if (s !== s.parentNode.querySelector('.item')) {
@@ -17,15 +19,26 @@ var handleArrows = key => {
       }
       break;
     case 38:
+      i -= 4;
+      if (0 > i) {
+       i = 0;
+      }
+      s.classList.remove('selected');
+      children[i].classList.add('selected');
       break;
     case 39:
-      var children = s.parentNode.querySelectorAll('.item');
       if (s !== children[children.length - 1]) {
         s.classList.remove('selected');
         s.nextSibling.classList.add('selected');
       }
       break;
     case 40:
+      i += 4;
+      if (children.length <= i) {
+       i = children.length - 1;
+      }
+      s.classList.remove('selected');
+      children[i].classList.add('selected');
       break;
   }
 };
@@ -44,7 +57,6 @@ var filter = (text, items) => {
 
 var handleInput = (i, h, data, e) => {
   if (e.which > 36 && e.which < 41) {
-    console.log(e.which);
     e.preventDefault();
     handleArrows(e.which);
     return;
